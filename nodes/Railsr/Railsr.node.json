@@ -1,0 +1,14 @@
+{
+	"node": "n8n-nodes-railsr.railsr",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Finance & Accounting", "Data & Storage"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.railsr.com/"
+			}
+		]
+	},
+	"alias": ["railsr", "railsbank", "banking", "payments", "cards", "ledger", "finance", "baas"]
+}

@@ -1,0 +1,14 @@
+{
+	"node": "n8n-nodes-railsr.railsrTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Finance & Accounting"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.railsr.com/webhooks"
+			}
+		]
+	},
+	"alias": ["railsr", "webhook", "trigger", "banking", "payments"]
+}
