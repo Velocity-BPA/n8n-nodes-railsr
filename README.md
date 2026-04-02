@@ -8,281 +8,209 @@
 >
 > For licensing information, visit https://velobpa.com/licensing or contact licensing@velobpa.com.
 
-A comprehensive n8n community node for the **Railsr** embedded finance platform. Enables no-code/low-code automation of Banking-as-a-Service operations including ledger management, multi-rail payments (SEPA, Faster Payments, BACS, SWIFT), card issuing, FX, and KYC/KYB compliance workflows.
+This n8n community node provides seamless integration with Railsr's Banking-as-a-Service platform. It includes 7 comprehensive resources for managing digital banking operations including ledgers, payments, beneficiaries, customers, accounts, transactions, and webhooks, enabling complete financial service automation workflows.
 
-![n8n](https://img.shields.io/badge/n8n-community--node-orange)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![n8n Community Node](https://img.shields.io/badge/n8n-Community%20Node-blue)
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![Banking](https://img.shields.io/badge/Banking-as--a--Service-green)
+![Payments](https://img.shields.io/badge/Payments-API-orange)
+![Financial Services](https://img.shields.io/badge/FinTech-Integration-purple)
 
 ## Features
 
-- **23 Resource Categories** covering the complete Railsr embedded finance API
-- **150+ Operations** for comprehensive banking automation
-- **Multi-Rail Payments**: SEPA, SEPA Instant, UK Faster Payments, BACS, SWIFT
-- **Card Issuing**: Virtual and physical card creation, PIN management, transaction controls
-- **Multi-Currency Ledgers**: Account management, balances, statements, transactions
-- **Real-Time FX**: Currency conversion, rate quotes, conversion history
-- **Compliance Workflows**: KYC/KYB checks, document verification, audit logging
-- **Webhook Triggers**: 80+ event types for real-time notifications
-- **Sandbox & Production**: Full support for both environments
+- **Complete Banking Operations** - Full CRUD operations for accounts, customers, and beneficiaries
+- **Payment Processing** - Execute domestic and international payments with comprehensive tracking
+- **Ledger Management** - Real-time balance tracking and transaction recording
+- **Transaction Monitoring** - Query and analyze transaction history with advanced filtering
+- **Webhook Integration** - Automated event handling for real-time notifications
+- **Secure Authentication** - API key-based authentication with enterprise security
+- **Error Handling** - Comprehensive error management with detailed response parsing
+- **Validation Support** - Built-in data validation for all banking operations
 
 ## Installation
 
 ### Community Nodes (Recommended)
 
 1. Open n8n
-2. Go to **Settings** > **Community Nodes**
-3. Select **Install**
+2. Go to **Settings** → **Community Nodes**
+3. Click **Install a community node**
 4. Enter `n8n-nodes-railsr`
-5. Agree to the risks and click **Install**
+5. Click **Install**
 
 ### Manual Installation
 
 ```bash
-cd ~/.n8n/custom
+cd ~/.n8n
 npm install n8n-nodes-railsr
 ```
 
 ### Development Installation
 
 ```bash
-# Clone and install
 git clone https://github.com/Velocity-BPA/n8n-nodes-railsr.git
 cd n8n-nodes-railsr
 npm install
-
-# Build
 npm run build
-
-# Link to n8n
 mkdir -p ~/.n8n/custom
 ln -s $(pwd) ~/.n8n/custom/n8n-nodes-railsr
-
-# Restart n8n
+n8n start
 ```
 
 ## Credentials Setup
 
-| Field | Description |
-|-------|-------------|
-| **Environment** | Select Sandbox or Production |
-| **API Key** | Your Railsr API key |
-| **API Secret** | Your Railsr API secret |
-| **Program ID** | Your Railsr program identifier |
-
-Obtain credentials from the [Railsr Dashboard](https://dashboard.railsr.com).
+| Field | Description | Required |
+|-------|-------------|----------|
+| API Key | Your Railsr API key from the dashboard | ✓ |
+| Environment | Production or Sandbox environment | ✓ |
+| Base URL | API endpoint URL (auto-configured by environment) | ✓ |
 
 ## Resources & Operations
 
-### End User Management
+### 1. Ledger
+
 | Operation | Description |
 |-----------|-------------|
-| Create | Create a new end user (individual customer) |
-| Get | Retrieve end user details |
-| Update | Update end user information |
-| List | List all end users with filtering |
-| Delete | Remove an end user |
-| Activate | Activate an end user account |
-| Deactivate | Deactivate an end user account |
-| Suspend | Suspend an end user account |
+| Get Balance | Retrieve current ledger balance |
+| Get Ledger | Fetch ledger details and configuration |
+| List Entries | Get all ledger entries with filtering |
+| Create Entry | Add new transaction entry to ledger |
+| Update Entry | Modify existing ledger entry |
 
-### Ledger Management
+### 2. Payment
+
 | Operation | Description |
 |-----------|-------------|
-| Create | Create a new multi-currency ledger |
-| Get | Retrieve ledger details |
-| Update | Update ledger configuration |
-| List | List all ledgers |
-| Delete | Remove a ledger |
-| Get Balance | Get current ledger balance |
-| Get Transactions | List ledger transactions |
-| Get Statement | Generate ledger statement |
+| Create Payment | Initiate new payment transaction |
+| Get Payment | Retrieve payment details by ID |
+| List Payments | Get all payments with filtering options |
+| Cancel Payment | Cancel pending payment transaction |
+| Update Payment | Modify payment details |
 
-### Ledger Account
+### 3. Beneficiary
+
 | Operation | Description |
 |-----------|-------------|
-| Create | Create a ledger account |
-| Get | Retrieve account details |
-| Update | Update account information |
-| List | List accounts |
-| Delete | Remove an account |
-| Get Balance | Get account balance |
-| Freeze | Freeze an account |
-| Unfreeze | Unfreeze an account |
-| Close | Close an account |
+| Create Beneficiary | Add new payment beneficiary |
+| Get Beneficiary | Retrieve beneficiary details |
+| List Beneficiaries | Get all beneficiaries with search |
+| Update Beneficiary | Modify beneficiary information |
+| Delete Beneficiary | Remove beneficiary from system |
 
-### Payments - SEPA
+### 4. Customer
+
 | Operation | Description |
 |-----------|-------------|
-| Create | Initiate a SEPA transfer |
-| Create Instant | Initiate a SEPA Instant payment |
-| Get | Get payment details |
-| List | List SEPA payments |
-| Cancel | Cancel a pending payment |
-| Create Direct Debit | Create a SEPA Direct Debit |
-| Create Mandate | Create a Direct Debit mandate |
-| Get Mandate | Retrieve mandate details |
+| Create Customer | Register new customer profile |
+| Get Customer | Retrieve customer details |
+| List Customers | Get all customers with filtering |
+| Update Customer | Modify customer information |
+| Delete Customer | Remove customer from system |
+| Verify Customer | Execute KYC verification process |
 
-### Payments - UK
+### 5. Account
+
 | Operation | Description |
 |-----------|-------------|
-| Create Faster Payment | Initiate a Faster Payment |
-| Create BACS | Initiate a BACS payment |
-| Get | Get payment details |
-| List | List UK payments |
-| Cancel | Cancel a pending payment |
-| Create Direct Debit | Create a UK Direct Debit |
+| Create Account | Open new customer account |
+| Get Account | Retrieve account details |
+| List Accounts | Get all accounts with filtering |
+| Update Account | Modify account settings |
+| Close Account | Close existing account |
+| Freeze Account | Temporarily suspend account |
+| Unfreeze Account | Reactivate frozen account |
 
-### Payments - SWIFT
+### 6. Transaction
+
 | Operation | Description |
 |-----------|-------------|
-| Create | Initiate a SWIFT transfer |
-| Get | Get payment details |
-| List | List SWIFT payments |
-| Track | Track payment status |
-| Get Quote | Get SWIFT transfer quote |
+| Get Transaction | Retrieve transaction details by ID |
+| List Transactions | Get transaction history with filtering |
+| Search Transactions | Advanced transaction search |
+| Get Statement | Generate account statement |
 
-### Cards
+### 7. Webhook
+
 | Operation | Description |
 |-----------|-------------|
-| Create Virtual | Issue a virtual card |
-| Create Physical | Issue a physical card |
-| Get | Get card details |
-| List | List cards |
-| Activate | Activate a card |
-| Block | Block a card |
-| Unblock | Unblock a card |
-| Set PIN | Set card PIN |
-| Get PIN | Retrieve card PIN |
-| Set Limits | Configure spending limits |
-| Get Limits | Get spending limits |
-| Cancel | Cancel a card |
-
-### FX (Foreign Exchange)
-| Operation | Description |
-|-----------|-------------|
-| Convert | Execute currency conversion |
-| Get Rate | Get current exchange rate |
-| Get Rates | Get all available rates |
-| Get History | Get conversion history |
-| Get Quote | Get a conversion quote |
-
-### Compliance - KYC
-| Operation | Description |
-|-----------|-------------|
-| Create | Initiate a KYC check |
-| Get | Get KYC check status |
-| List | List KYC checks |
-| Update | Update KYC information |
-| Approve | Manually approve KYC |
-
-### Compliance - KYB
-| Operation | Description |
-|-----------|-------------|
-| Create | Initiate a KYB check |
-| Get | Get KYB check status |
-| List | List KYB checks |
-| Update | Update KYB information |
-| Approve | Manually approve KYB |
-
-### Additional Resources
-- **Beneficiary**: Payment recipient management and validation
-- **Pay-in**: Incoming payment processing and reconciliation
-- **Payout**: Outgoing payment management with approval workflows
-- **Internal Transfer**: Inter-account transfers and reversals
-- **Card Transaction**: Transaction history, disputes, authorization details
-- **Card Program**: Program configuration and controls
-- **FX Quote**: Real-time quote management
-- **Webhook**: Subscription management
-- **Document**: Document upload and verification
-- **Company Holder**: Corporate entity management
-- **Simulation**: Sandbox testing scenarios
-- **Report**: Compliance and transaction reporting
-- **Audit Log**: Activity tracking and compliance
-
-## Trigger Node
-
-The **Railsr Trigger** node supports 80+ webhook event types for real-time notifications:
-
-### Event Categories
-- **End User Events**: Created, updated, activated, suspended
-- **Ledger Events**: Balance changes, transactions
-- **Card Events**: Created, activated, blocked, transactions
-- **Payment Events**: Initiated, completed, failed
-- **Compliance Events**: KYC/KYB status changes
-- **Document Events**: Uploaded, verified, rejected
+| Create Webhook | Register new webhook endpoint |
+| Get Webhook | Retrieve webhook configuration |
+| List Webhooks | Get all registered webhooks |
+| Update Webhook | Modify webhook settings |
+| Delete Webhook | Remove webhook registration |
+| Test Webhook | Send test payload to endpoint |
 
 ## Usage Examples
 
-### Create End User and Issue Card
-```
-1. Railsr Node: Create End User
-2. Railsr Node: Create Ledger (linked to end user)
-3. Railsr Node: Create Virtual Card (linked to ledger)
-```
-
-### Process SEPA Payment
-```
-1. Railsr Node: Create Beneficiary
-2. Railsr Node: Validate Beneficiary
-3. Railsr Node: Create SEPA Payment
-4. Railsr Trigger: Wait for payment.completed event
-```
-
-### Currency Conversion Flow
-```
-1. Railsr Node: Get FX Quote
-2. IF Node: Check rate acceptability
-3. Railsr Node: Execute Conversion
+```javascript
+// Create a new customer
+{
+  "personal_details": {
+    "name": "John Doe",
+    "date_of_birth": "1990-01-15",
+    "email": "john.doe@example.com",
+    "phone": "+1234567890"
+  },
+  "address": {
+    "address_line_one": "123 Main Street",
+    "address_city": "New York",
+    "address_postal_code": "10001",
+    "address_country": "US"
+  }
+}
 ```
 
-## Embedded Finance Concepts
+```javascript
+// Execute a payment
+{
+  "payment_type": "domestic",
+  "amount": 1000.00,
+  "currency": "GBP",
+  "beneficiary_id": "ben_12345678",
+  "reference": "Invoice payment #INV-001",
+  "payment_date": "2024-01-15"
+}
+```
 
-### Ledgers
-Multi-currency ledgers serve as the core account structure. Each ledger can hold multiple currencies and track all financial movements.
+```javascript
+// Query transactions with filters
+{
+  "account_id": "acc_12345678",
+  "from_date": "2024-01-01",
+  "to_date": "2024-01-31",
+  "transaction_type": "credit",
+  "limit": 100
+}
+```
 
-### Payment Rails
-- **SEPA**: Single Euro Payments Area - European transfers (1-2 business days)
-- **SEPA Instant**: Real-time European payments (seconds)
-- **Faster Payments**: UK real-time payments
-- **BACS**: UK batch payments (3 business days)
-- **SWIFT**: International wire transfers
-
-### Card Issuing
-Issue virtual or physical cards linked to ledger accounts with configurable spending limits, geographic restrictions, and merchant category controls.
+```javascript
+// Create webhook for payment notifications
+{
+  "url": "https://your-app.com/webhook/railsr",
+  "events": ["payment.completed", "payment.failed"],
+  "active": true,
+  "secret": "webhook_secret_key"
+}
+```
 
 ## Error Handling
 
-The node provides detailed error messages for common scenarios:
-- **Authentication Errors**: Invalid API credentials
-- **Validation Errors**: Missing or invalid parameters
-- **Business Errors**: Insufficient funds, compliance blocks
-- **Rate Limits**: API throttling responses
-
-## Security Best Practices
-
-1. **Use Sandbox First**: Test all workflows in sandbox before production
-2. **Secure Credentials**: Store API credentials securely in n8n
-3. **Validate Beneficiaries**: Always validate before sending payments
-4. **Monitor Webhooks**: Set up alerts for failed webhook deliveries
-5. **Audit Logging**: Enable audit logs for compliance
+| Error | Description | Solution |
+|-------|-------------|----------|
+| Invalid API Key | Authentication failed with provided credentials | Verify API key in credentials configuration |
+| Insufficient Balance | Account balance too low for transaction | Check account balance before payment execution |
+| Invalid Beneficiary | Beneficiary ID not found or inactive | Verify beneficiary exists and is active |
+| Rate Limit Exceeded | Too many API requests in time window | Implement delays between requests |
+| Validation Error | Required fields missing or invalid format | Check field requirements in API documentation |
+| Network Timeout | Request timed out during API call | Retry with exponential backoff strategy |
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Build
 npm run build
-
-# Run tests
 npm test
-
-# Run linting
 npm run lint
-
-# Watch mode
 npm run dev
 ```
 
@@ -300,30 +228,24 @@ This n8n community node is licensed under the **Business Source License 1.1**.
 Permitted for personal, educational, research, and internal business use.
 
 ### Commercial Use
-Use of this node within any SaaS, PaaS, hosted platform, managed service,
-or paid automation offering requires a commercial license.
+Use of this node within any SaaS, PaaS, hosted platform, managed service, or paid automation offering requires a commercial license.
 
-For licensing inquiries:
-**licensing@velobpa.com**
+For licensing inquiries: **licensing@velobpa.com**
 
 See [LICENSE](LICENSE), [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md), and [LICENSING_FAQ.md](LICENSING_FAQ.md) for details.
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please ensure:
+
+1. Code follows existing style conventions
+2. All tests pass (`npm test`)
+3. Linting passes (`npm run lint`)
+4. Documentation is updated for new features
+5. Commit messages are descriptive
 
 ## Support
 
-- **Documentation**: [Railsr API Docs](https://docs.railsr.com)
 - **Issues**: [GitHub Issues](https://github.com/Velocity-BPA/n8n-nodes-railsr/issues)
-- **n8n Community**: [community.n8n.io](https://community.n8n.io)
-
-## Acknowledgments
-
-- [Railsr](https://railsr.com) for their embedded finance platform
-- [n8n](https://n8n.io) for the workflow automation platform
-- The n8n community for feedback and contributions
+- **API Documentation**: [Railsr API Docs](https://docs.railsr.com)
+- **Developer Portal**: [Railsr Developer Hub](https://developer.railsr.com)
